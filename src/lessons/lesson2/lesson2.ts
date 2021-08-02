@@ -48,46 +48,91 @@ console.log('lesson 2');
 //
 // let b = 50;
 
+// let globalScope = {
+//   outerScope: null,
+//   f: 'Function',
+//   a: 0,
+// }
+//
+// let a = 10;
+//
+// function f() {
+//   let functionScope = {
+//     outerScope: globalScope,
+//     innerF: 'Function',
+//     b: 50,
+//   }
+//   console.log(a)
+//   let b = 50;
+//
+//   function innerF() {
+//     let innerFunctionScope = {
+//       outerScope: functionScope,
+//       a: 0,
+//     }
+//     console.log(a);
+//     a = 0;
+//     console.log(b)
+//   }
+//   innerF()
+// }
+//
+// f()
+
 let globalScope = {
   outerScope: null,
   f: 'Function',
-  a: 10;
+  a: 600,
+  test: 'Function'
 }
+//
+// let a = 10;
+//
+// function f() {
+//   let functionScope = {
+//     outerScope: globalScope,
+//     innerF: 'Function',
+//     b: 200,
+//   }
+//   let b = 50;
+//
+//   function innerF() {
+//     let innerFunctionScope = {
+//       outerScope: functionScope,
+//     }
+//     console.log(b);
+//     b += 50;
+//   }
+//   return innerF;
+// }
+//
+// let test = f();
+// a = 600;
+// test();
+// test();
+// test();
+// test = null;
 
-let a = 10;
-
-function f() {
-  let functionScope = {
-    outerScope: globalScope,
-    innerF: 'Function',
-    b: 50,
-  }
-  console.log(a)
-  let b = 50;
-
-  function innerF() {
-    let innerFunctionScope = {
-      outerScope: functionScope,
-      a: 0,
-    }
-
-    let a = 0;
-    console.log(b)
-  }
-  innerF()
-}
-
-f()
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
-// const sum = (a: number) => {
-//   return (b: number) => {
-//     return a + b;
+//
+// function sum(n: number) {
+//   let sumFunctionScope = {
+//     outerScope: globalScope,
+//     n: undefined, // 3
+//   }
+//   return function (n2: number) { // () => {}
+//     let anonimFuctionScope = {
+//       outerScope: sumFunctionScope,
+//       n2: undefined, // 6
+//     }
+//     return n + n2;
 //   }
 // }
+// let param = sum(3);
 // console.log(sum(3)(6))
-
+// param(6)
 
 
 // Task 02
@@ -98,18 +143,27 @@ f()
 // const counter2 = makeCounter();
 // counter2(); // 1
 // counter(); // 3
-const makeCounter = () => {
-  let count = 0;
-  return () => {
-    return ++count;
-  }
-}
-const counter = makeCounter();
-console.log(counter());
-console.log(counter());
-const counter2 = makeCounter();
-console.log(counter2());
-console.log(counter());
+
+// function makeCounter() {
+//   let makeCounterScope = {
+//     outerScope: globalScope,
+//     count: 0, // iter1 => 1, iter2 => 2, iter3 => 3
+//   }
+//   let count = 0;
+//   return function () {
+//     let anonimFuctionScope = {
+//       outerScope: makeCounterScope,
+//     }
+//     return ++count;
+//   }
+// }
+//
+// const counter = makeCounter();
+// console.log(counter());
+// console.log(counter());
+// const counter2 = makeCounter();
+// console.log(counter2());
+// console.log(counter());
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
@@ -118,6 +172,46 @@ console.log(counter());
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+// function makeCounter(n: number) {
+//   let counter = n;
+//   return {
+//     increase: () => ++counter,
+//     decrease: () => --counter,
+//     reset: () => {
+//       counter = 0;
+//       return counter;
+//     },
+//     set: (num: number) => {
+//       counter = num;
+//       return counter;
+//     },
+//     getCount: () => counter,
+//   };
+// }
+
+//Recursion
+
+// sumTo(1) = 1
+// sumTo(2) = 2 + 1 = 3
+// sumTo(3) = 3 + 2 + 1 = 6
+// sumTo(4) = 4 + 3 + 2 + 1 = 10
+// ...
+// sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
+
+// function sumTo(n: number) {
+//   let result = 0;
+//   for (let i = n; i > 0; i--) {
+//     result += i;
+//   }
+//   return result;
+// }
+
+// function sumTo(n: number): number {
+//   if (n === 1) return n;
+//   return n + sumTo(n - 1);
+// }
+// console.log(sumTo(100))
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -129,6 +223,31 @@ console.log(counter());
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 
+function superSum(num: number) {
+  if (num <= 0) return 0;
+  if (num === 1) return (n: number) => n;
+
+  let _arguments: number[] = [];
+
+  function helper(...args: number[]) {
+    _arguments = [..._arguments, ...args];
+    if(_arguments.length >= num) {
+      _arguments.length = num;
+      return _arguments.reduce((acc, item) => acc + item)
+    } else {
+      return helper;
+    }
+  }
+  return helper;
+}
+
+//@ts-ignore
+console.log(superSum(3)(2)(5)(3))
+//@ts-ignore
+console.log(superSum(3)(2,5,3))
+//@ts-ignore
+console.log(superSum(3)(2,5)(3,9))
+
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
 // Task 05
@@ -138,4 +257,5 @@ console.log(counter());
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => {};
+export default () => {
+};
