@@ -20,9 +20,75 @@ console.log('lesson 2');
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
+// function/class, loops, anonimus code, switch, try/catch, if/ else
+
+// let globalScope = {
+//   outerScope: null,
+//   a: 10,
+//   f: 'Function',
+//   b: 50,
+// }
+//
+// f(5);
+//
+// function f(arg1) {
+//   let functionScope = {
+//     outerScope: globalScope,
+//     c: 50,
+//     arg1: 5,
+//     s: 100
+//   }
+//
+//   var c = 50;
+//   let s = 100;
+//
+// }
+//
+// var a = 10;
+//
+// let b = 50;
+
+let globalScope = {
+  outerScope: null,
+  f: 'Function',
+  a: 10;
+}
+
+let a = 10;
+
+function f() {
+  let functionScope = {
+    outerScope: globalScope,
+    innerF: 'Function',
+    b: 50,
+  }
+  console.log(a)
+  let b = 50;
+
+  function innerF() {
+    let innerFunctionScope = {
+      outerScope: functionScope,
+      a: 0,
+    }
+
+    let a = 0;
+    console.log(b)
+  }
+  innerF()
+}
+
+f()
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
+// const sum = (a: number) => {
+//   return (b: number) => {
+//     return a + b;
+//   }
+// }
+// console.log(sum(3)(6))
+
+
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -32,6 +98,18 @@ console.log('lesson 2');
 // const counter2 = makeCounter();
 // counter2(); // 1
 // counter(); // 3
+const makeCounter = () => {
+  let count = 0;
+  return () => {
+    return ++count;
+  }
+}
+const counter = makeCounter();
+console.log(counter());
+console.log(counter());
+const counter2 = makeCounter();
+console.log(counter2());
+console.log(counter());
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
