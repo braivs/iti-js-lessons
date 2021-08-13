@@ -59,31 +59,31 @@ let prom = new Promise((resolve, reject) => {
 //     console.log('err3', err3)
 //   });
 
-prom
-  .then(res => {
-    console.log('resolve', res);
-    return Promise.reject('YoYo')
-  })
-  // @ts-ignore
-  .finally(fin => {
-    console.log('fin ', fin);
-    return 100500;
-  })
-  .then(res2 => {
-    console.log('res2 ', res2)
-    return res2 + 50
-  })
-  .then(res3 => {
-    console.log('res3 ', res3)
-  })
-  .catch(err => {
-    console.log('err ', err)
-    return 1000;
-  })
-  .then(res4 => {
-    console.log('res4 ', res4)
-  })
-;
+// prom
+//   .then(res => {
+//     console.log('resolve', res);
+//     return Promise.reject('YoYo')
+//   })
+//   // @ts-ignore
+//   .finally(fin => {
+//     console.log('fin ', fin);
+//     return 100500;
+//   })
+//   .then(res2 => {
+//     console.log('res2 ', res2)
+//     return res2 + 50
+//   })
+//   .then(res3 => {
+//     console.log('res3 ', res3)
+//   })
+//   .catch(err => {
+//     console.log('err ', err)
+//     return 1000;
+//   })
+//   .then(res4 => {
+//     console.log('res4 ', res4)
+//   })
+// ;
 
 //Promise.reject()
 //Promise.resolve()

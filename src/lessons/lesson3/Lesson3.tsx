@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import API from './API';
 import './lesson_3';
+import {log} from "util";
 
 const Lesson3 = () => {
     const [searchName, setSearchName] = useState('');
@@ -10,6 +11,15 @@ const Lesson3 = () => {
 
     const searchFilm = () => {
         API.searchFilmsByTitle(searchName)
+          .then(response => {
+              console.log(response);
+              if (response.data.Response === 'True') {
+                  setSerachResult(JSON.stringify(response.data.Search))
+              } else {
+                  setSerachResult(response.data.Error)
+              }
+          })
+          .catch(err => console.log(err))
     };
 
     const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
