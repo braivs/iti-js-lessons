@@ -1,8 +1,8 @@
 console.log('Lesson 5');
 
 // Вопросы:
-// 1. как вызвать с тайпскрип конструктор с this
-// 2. может ли стрелочная функция быть коструктором
+// 1. как вызвать с тайпскрипт конструктор с this
+// 2. может ли стрелочная функция быть конструктором - не может быть, т.к. нет объекта prototype
 
 // Keyword - this
 // +- https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/this
