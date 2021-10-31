@@ -1,17 +1,19 @@
-console.log('Lesson 7');
+import './pr'
+
+// console.log('Lesson 7');
 
 // __Proto__
 // + https://learn.javascript.ru/prototype-inheritance
 // + https://habr.com/ru/post/518360/
-// https://learn.javascript.ru/native-prototypes
+// +- (no full homework) https://learn.javascript.ru/native-prototypes
 
 // Prototype
 // + https://learn.javascript.ru/function-prototype
-// https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
+// - https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
 
 
-// https://www.youtube.com/watch?v=aQkgUUmUJy4&t=21s
-// https://www.youtube.com/watch?v=b55hiUlhAzI
+// + https://www.youtube.com/watch?v=aQkgUUmUJy4&t=21s
+// + https://www.youtube.com/watch?v=b55hiUlhAzI
 
 
 //Task 01
@@ -19,6 +21,9 @@ console.log('Lesson 7');
 // метода walk, eat, sleep - каждый метод должен выводить в консоль строку имя + действие. Пример:
 // walk => `${this.name} walking`
 // проверить, что методы работают
+// class Animal {
+//
+// }
 
 
 //Task 02
